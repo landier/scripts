@@ -4,12 +4,8 @@ import sys
 import json
 import urllib, urllib2
 
-API_KEY = ''
 
 URL_SHORTENER_API = 'https://www.googleapis.com/urlshortener/v1/url'
-
-
-EXAMPLE = 'http://www.urchin.com/download.html?utm_source=SOURCE&utm_medium=SUPPORT&utm_term=TERME&utm_content=CONTENU&utm_campaign=NOM'
 
 
 PARAMETERS = {
@@ -25,16 +21,20 @@ CHANNELS = [
 		'LinkedIn',
 		'Facebook',
 		'Twitter',
+		'GooglePlus',
 		'Email'
 	]
 
 
-def generate_urls(url):
+def generate_urls(url, medium=None):
 	for channel in CHANNELS:
-		print channel + ': ' + generate_url_for_channel(url, channel.lower())
+		print channel + ': ' + generate_url_for_channel(url, channel.lower(), medium)
 
-def generate_url_for_channel(url, source):
+
+def generate_url_for_channel(url, source, medium=None):
 	concatenated_url = url + '?' + PARAMETERS['source'] + '=' + source + '&' + PARAMETERS['campaign'] + '=' + url
+	if medium is not None:
+		concatenated_url = concatenated_url + '&' + PARAMETERS['medium'] + '=' + medium
 	return shorten_url(concatenated_url)
 
 
@@ -52,7 +52,9 @@ def shorten_url(url):
 
 
 if __name__ == "__main__":
-	print 'Number of arguments:', len(sys.argv), 'arguments.'
-	print 'Argument List:', str(sys.argv)
-	generate_urls(sys.argv[1])
-	shorten_url('http://nicolas.landier.org')
+	#print 'Number of arguments:', len(sys.argv), 'arguments.'
+	#print 'Argument List:', str(sys.argv)
+	if len(sys.argv) > 2:
+		generate_urls(sys.argv[1], sys.argv[2])
+	else:
+		generate_urls(sys.argv[1])     
