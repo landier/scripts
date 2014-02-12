@@ -69,14 +69,14 @@ if __name__ == "__main__":
 	else:
 		generate_urls(sys.argv[1])	 
 
-	try:								
-		opts, args = getopt.getopt(argv, "hs:m:c:", ["help", "source=", "medium=", "campaign="])
-	except getopt.GetoptError:		  
-		sys.exit(2)					 
-	for opt, arg in opts:
-		if opt in ("-h", "--help"):
-			help()					 
-			sys.exit()				  
-		else if opt in ("-s", "--source"):
-			
-			generate_urls(sys.argv[1])
+#	try:								
+#		opts, args = getopt.getopt(argv, "hs:m:c:", ["help", "source=", "medium=", "campaign="])
+#	except getopt.GetoptError:		  
+#		sys.exit(2)					 
+#	for opt, arg in opts:
+#		if opt in ("-h", "--help"):
+#			help()					 
+#			sys.exit()				  
+#		else if opt in ("-s", "--source"):
+#			
+			#generate_urls(sys.argv[1])
