@@ -4,7 +4,7 @@ import sys
 import json
 import urllib, urllib2
 import getopt
-
+from urlparse import urlparse
 
 URL_SHORTENER_API = 'https://www.googleapis.com/urlshortener/v1/url'
 
@@ -33,7 +33,7 @@ def generate_urls(url, medium=None):
 
 
 def generate_url_for_channel(url, source, medium=None):
-	concatenated_url = url + '?' + PARAMETERS['source'] + '=' + source + '&' + PARAMETERS['campaign'] + '=' + url
+	concatenated_url = url + '?' + PARAMETERS['source'] + '=' + source + '&' + PARAMETERS['campaign'] + '=' + urlparse(url)[2]
 	if medium is not None:
 		concatenated_url = concatenated_url + '&' + PARAMETERS['medium'] + '=' + medium
 	return shorten_url(concatenated_url)
